@@ -28,6 +28,8 @@ const init = function () {
 
   player0El.classList.remove("player--winner");
   player1El.classList.remove("player--winner");
+  player0El.classList.remove("player--lose");
+  player1El.classList.remove("player--lose");
   player0El.classList.add("player--active");
   player1El.classList.remove("player--active");
 };
@@ -57,7 +59,7 @@ btnRoll.addEventListener("click", function () {
         currentScore;
     }
     //switch to next player
-    else {
+     else {
       switchPlayer();
     }
   }
@@ -80,11 +82,37 @@ btnHold.addEventListener("click", function () {
       document
         .querySelector(`.player--${activePlayer}`)
         .classList.remove("player--active");
-    } else {
-      //switch to next player
-      switchPlayer();
+      }
+      //to be improved if player is over 21
+      else if(score[activePlayer] >=21){
+        playing = false;
+      diceEl.classList.add("hidden");
+        document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add("player--lose");
+      } 
     }
-  }
+    else {
+  //switch to next player
+  switchPlayer();
+}
 });
 
 btnNew.addEventListener("click", init);
+
+
+//update to be done!
+/* 
+if(score[activePlayer] === 21){
+  console.log("winner!")
+}
+else if (score[activePlayer] > 21){
+  console.log("lose the game!")
+}
+
+if(player0El > player1El){
+ console.log(player0El + "winner")
+}
+else{
+  console.log(player1El + "winner")
+} */
